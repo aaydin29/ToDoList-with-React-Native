@@ -5,7 +5,7 @@ export default StyleSheet.create({
     color: 'white',
     backgroundColor: '#37474f',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 25,
     padding: 10,
     textAlign: 'center',
   },
@@ -60,9 +60,11 @@ export default StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderRadius: 5,
+    flex: 1,
   },
   list_items: {
     fontSize: 15,
+    flex: 4,
   },
   delete_button: {
     width: 22,
@@ -75,5 +77,25 @@ export default StyleSheet.create({
   },
   delete_button_text: {
     color: 'white',
+  },
+  completed_button: {
+    width: 22,
+    height: 22,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 11,
+    marginRight: 6,
+  },
+  completed_button_text: {
+    color: 'white',
+  },
+  buttons: {
+    // backgroundColor: 'blue',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flex: 1,
   },
 });

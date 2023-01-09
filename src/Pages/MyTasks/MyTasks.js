@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity, TextInput} from 'react-native';
-import styles from './App.style';
+import styles from './MyTasks.style';
+import {useDispatch} from 'react-redux';
 
-function App() {
+function MyTasks() {
   const [text, setText] = useState('');
   const [tasks, setTasks] = useState([]);
+  const dispatch = useDispatch();
 
   const handlePress = () => {
     setTasks([...tasks, text]);
@@ -16,9 +18,17 @@ function App() {
     setTasks(newTask);
   };
 
+  const handleCompletePress = task => {
+    const newTask = [...tasks];
+    const index = tasks.indexOf(task);
+    newTask.splice(index, 1);
+    setTasks(newTask);
+    dispatch({type: 'SEND_COMPLETED', payload: {task}});
+  };
+
   return (
     <View style={styles.main_container}>
-      <Text style={styles.header}>TODO LIST</Text>
+      <Text style={styles.header}>To Do List</Text>
       <View style={styles.input_container}>
         <TextInput
           style={styles.input}
@@ -38,11 +48,18 @@ function App() {
           renderItem={({item, index}) => (
             <View style={styles.task_container}>
               <Text style={styles.list_items}>{item}</Text>
-              <TouchableOpacity
-                style={styles.delete_button}
-                onPress={() => handleDeletePress(index)}>
-                <Text style={styles.delete_button_text}>X</Text>
-              </TouchableOpacity>
+              <View style={styles.buttons}>
+                <TouchableOpacity
+                  style={styles.completed_button}
+                  onPress={() => handleCompletePress(item)}>
+                  <Text style={styles.completed_button_text}>✓</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.delete_button}
+                  onPress={() => handleDeletePress(index)}>
+                  <Text style={styles.delete_button_text}>X</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           )}
         />
@@ -51,4 +68,4 @@ function App() {
   );
 }
 
-export default App;
+export default MyTasks;
